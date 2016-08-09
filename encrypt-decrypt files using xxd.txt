@@ -1,0 +1,40 @@
+10.15.10.251
+255.255.254.0
+10.15.10.1
+
+Intel Corporation 82599ES 10-Gigabit SFI/SFP+ Network Connection
+
+
+head -c20 /dev/urandom | xxd -ps
+
+
+for x in `seq 1 1 100`; do ps -eo state,pid,cmd | grep "^D"; echo "----"; sleep 0.1; done
+
+
+RGB
+
+24
+
+70
+
+127
+
+
+root@EX4000 tmp]# hashkey=`echo -ne zippy | xxd -p`; openssl rc4 -e -nosalt -nopad -K $hashkey -in new -out new.enc
+[root@EX4000 tmp]#
+[root@EX4000 tmp]#
+[root@EX4000 tmp]#
+[root@EX4000 tmp]# cat new.enc
+U(+¦¦J  ¦¦lbY¦"\¦Y¦¦o¦O2¦¦ig¦a¦[root@EX4000 tmp]#
+[root@EX4000 tmp]#
+[root@EX4000 tmp]#
+[root@EX4000 tmp]#
+[root@EX4000 tmp]# vi new
+[root@EX4000 tmp]#
+[root@EX4000 tmp]# vi new.enc
+[root@EX4000 tmp]#
+[root@EX4000 tmp]# rm new
+rm: remove regular file `new'? y
+[root@EX4000 tmp]# hashkey=`echo -ne zippy | xxd -p`; openssl rc4 -e -nosalt -nopad -K $hashkey -in new.enc -out new
+[root@EX4000 tmp]# cat new
+this is an encrypted message!

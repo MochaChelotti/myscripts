@@ -1,0 +1,76 @@
+ping -c 5 -q $host | grep -oP '\d+(?=% packet loss)'
+
+packet_loss=$(ping -c 5 -q $host | grep -oP '\d+(?=% packet loss)')
+echo $[100 - $packet_loss]
+
+
+packet loss script 
+
+ ping 10.1.100.121 | awk '{ sent=NR-1; received+=/^.*(time=.+ ms).*$/; loss=0; } { if (sent>0) loss=100-((received/sent)*100) } { printf "sent:%d received:%d loss:%d%%\n", sent, received, loss }'
+sent:0 received:0 loss:0%
+sent:1 received:1 loss:0%
+sent:2 received:2 loss:0%
+sent:3 received:3 loss:0%
+sent:4 received:4 loss:0%
+sent:5 received:5 loss:0%
+sent:6 received:6 loss:0%
+sent:7 received:7 loss:0%
+sent:8 received:8 loss:0%
+sent:9 received:9 loss:0%
+sent:10 received:10 loss:0%
+sent:11 received:11 loss:0%
+sent:12 received:12 loss:0%
+
+
+Calculate the retransmission rate
+
+ Packets retransmitted 
+ ---------------------   X 100  = Retransmission Rate
+     packets sent
+
+     4073685
+    ----------  x 100 = .29%
+    1392925583
+
+
+
+•         TCP 22 -> SSH (Secure Shell)
+•         TCP 123 -> NTP (Network Time Protocol)
+•         TCP 7201 -> Topology manager
+•         TCP 8000 -> Grid Management API
+•         TCP 28700 – 28799 -> ExaGrid Services
+•         TCP 32768 – 61000 -> Replication Service (Ephemeral Ports)
+
+
+
+
+0.00820320448268389385932962809287
+
+
+
+[root@crlExaGrid2 upgrade]# nicinfo 
+Name  Iface  Hardware Address   Speed  Auto  Up  Type    IP Addresses/Masks
+NIC1  eth0   00:25:90:47:3a:22  1000   auto  up  static  172.22.241.20/27
+NIC2  eth1   00:25:90:47:3a:23  1000   auto  up  static  172.22.241.21/27
+NIC3  eth2   0c:c4:7a:14:b0:2e  1000   auto  up  static  172.22.241.22/27
+NIC4  eth3   0c:c4:7a:14:b0:2f  1000   auto  up  static  172.22.241.23/27
+NIC5  eth4   90:e2:ba:7e:e2:70  -      -     -   dhcp
+NIC6  eth5   90:e2:ba:7e:e2:71  -      -     -   dhcp
+
+
+
+root@crlExaGrid2 upgrade]# lstopo 
+
+8f3680aa HUB @8F3680AA (NORMAL, #2)
+  c4c489fe pdxExaGrid1.grid-local.exagrid.com (DSMREPLICA, KDCSLAVE, NORMAL, #20)
+  09f873bf pdxExaGrid2.grid-local.exagrid.com (DSMMASTER, KDCMASTER, NORMAL, #19)
+
+b1a365f5 SPOKE @B1A365F5 (NORMAL, #1)
+  0616e65e crlExaGrid1.grid-local.exagrid.com (DSMREPLICA, KDCMASTER, NORMAL, #46)
+* 6bc81355 crlExaGrid2.grid-local.exagrid.com (DSMMASTER, KDCSLAVE, NORMAL, #43)
+
+
+
+172.18.2.33
+
+

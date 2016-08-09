@@ -1,0 +1,37 @@
+
+[root@LCCOEx04 sa]# pwd
+/var/log/sa
+[root@LCCOEx04 sa]#
+[root@LCCOEx04 sa]#
+[root@LCCOEx04 sa]# ls -l
+total 4
+drwxr-xr-x 2 root root 4096 Jun 26 00:00 201506
+lrwxrwxrwx 1 root root   11 Jun 19 23:59 sa19 -> 201506/sa19
+lrwxrwxrwx 1 root root   11 Jun 20 23:59 sa20 -> 201506/sa20
+lrwxrwxrwx 1 root root   11 Jun 21 23:59 sa21 -> 201506/sa21
+lrwxrwxrwx 1 root root   11 Jun 22 23:59 sa22 -> 201506/sa22
+lrwxrwxrwx 1 root root   11 Jun 23 23:59 sa23 -> 201506/sa23
+lrwxrwxrwx 1 root root   11 Jun 24 23:59 sa24 -> 201506/sa24
+lrwxrwxrwx 1 root root   11 Jun 25 23:59 sa25 -> 201506/sa25
+lrwxrwxrwx 1 root root   11 Jun 26 16:27 sa26 -> 201506/sa26
+lrwxrwxrwx 1 root root   12 Jun 19 23:53 sar19 -> 201506/sar19
+lrwxrwxrwx 1 root root   12 Jun 20 23:53 sar20 -> 201506/sar20
+lrwxrwxrwx 1 root root   12 Jun 21 23:53 sar21 -> 201506/sar21
+lrwxrwxrwx 1 root root   12 Jun 22 23:53 sar22 -> 201506/sar22
+lrwxrwxrwx 1 root root   12 Jun 23 23:53 sar23 -> 201506/sar23
+lrwxrwxrwx 1 root root   12 Jun 24 23:53 sar24 -> 201506/sar24
+lrwxrwxrwx 1 root root   12 Jun 25 23:53 sar25 -> 201506/sar25
+
+
+
+
+
+java -jar kSar.jar -input 'file:///var/log/sa/sar24' -outputPDF yesterday.pdf
+
+Gather Data from these days....
+sar -f /var/log/sa/sa25
+
+
+Graph data from these days. 
+
+LC_ALL=C sar -A -f /var/log/sa/sa25 > /tmp/sarworking.data.txt

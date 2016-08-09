@@ -1,0 +1,4 @@
+du --max-depth=1 -h --apparent-size | sort -rh
+
+
+
