@@ -1,0 +1,251 @@
+tp://useopensource.blogspot.hk/2010/02/linux-nic-teaming-recommendations.html
+Purpose of NIC Teaming
+
+NIC teaming increases network availability by removing single-points-of-failure (SPOF). These SPOFs are components that will cause a service outage if they become unavailable. If we consider a single network connection from your server to your switch, we can identify quite a few SPOFs:
+Server NIC failure
+Network cable failure (such as being cut or unplugged)
+Network switch failure (such as a planned firmware upgrade or unplanned outage)
+Methods of NIC Teaming
+
+The reason I am writing this blog is to help people understand the different options for NIC teaming. If you search the Internet (like I did), you will be hard pressed to find a standard NIC teaming setup that works across all operating systems. You may not be able to find a listing of pros/cons and requirements of each NIC teaming strategy.
+
+In order to fully understand the NIC teaming options available in Linux, please read the official Linux Bonding How To. I am only going to cover two of these options, which are the two that I am going to recommend.
+
+Adaptive Load Balancing (ALB)
+
+The first recommended NIC teaming strategy is called "Adaptive Load Balancing" (ALB). This is specified in Linux by using bonding mode = 6.
+"Adaptive load balancing: includes balance-tlb plus receive load balancing (rlb) for IPV4 traffic, and does not require any special switch support. The receive load balancing is achieved by ARP negotiation."
+When you use ALB, you should plug each NIC into a different switch. This removes all three SPOF mentioned above. Additionally, it provides a basic level of load-balancing. I highly recommend using ALB for NIC teaming, because it offers the most advantages without requiring special configuration on the network switch.
+
+IEEE 802.3ad Dynamic link aggregation" (LACP)
+
+The second recommended NIC teaming strategy is called "IEEE 802.3ad Dynamic link aggregation" (LACP). This is specified in Linux by using bonding mode = 4.
+
+When you use LACP, you are required to plug all NICs into the same switch. You should only use LACP if you have an internally redundant switch, usually in the form of modular cards or a proprietary stack of switches. Additionally, you are also required to configure the switchports to use LACP. Once you have met all the requirements, you will have a great network connection. LACP can have the same fault-tolerence as ALB, and it has a better load-balancing than ALB.
+Advanced Networking Services (ANS) Team Types
+Adapter Fault Tolerance 
+Adaptive Load Balancing 
+Virtual Machine Load Balancing 
+Static Link Aggregation 
+IEEE 802.3ad Dynamic Link Aggregation 
+Switch Fault Tolerance 
+ NOTES:
+Mixing Intel PRO/100 and Intel 10GbE adapters in a team is not supported. 
+Not all team types are available on all operating systems. 
+Not all team types are available with all adapters. 
+NDIS 6.2 introduced new RSS data structures and interfaces. Because of this, you cannot enable RSS on teams that contain a mix of adapters that support NDIS 6.2 RSS and adapters that do not. 
+ 
+
+--------------------------------------------------------------------------------
+
+Adapter Fault Tolerance
+Adapter Fault Tolerance (AFT) provides redundancy through automatic failovers from an active adapter to a standby adapter in the case of switch port, cable, or adapter failure.
+
+One adapter is selected to be the active adapter. All other adapters are in standby.
+
+Primary and Secondary adapters can be selected for the team, but are not required.
+
+If a Primary adapter is chosen, it becomes the active adapter for the team. 
+If a Secondary adapter is chosen, it becomes a standby adapter. If the active adapter fails, the secondary adapter takes over and all other adapters in the team remain in standby. 
+Adapters that are not Primary or Secondary will stay in standby unless a failure occurs with both the Primary and Secondary adapters. 
+If no Primary is selected, the team will use the healthiest high-speed adapter in the team. 
+If the Primary adapter is changed or added, the team will reload, causing a momentary loss of connectivity. 
+Configuration notes
+AFT supports two to eight adapter ports per team. 
+Team members do not have to run at the same speed or duplex. 
+No switch configuration is required for this team type. 
+This teaming type works with any switch or hub. 
+
+--------------------------------------------------------------------------------
+
+Adaptive Load Balancing
+Adaptive Load Balancing (ALB) provides transmit traffic load balancing and fault tolerance in the event of switch port, cable, or adapter failure.
+
+Intel® PROSet analyzes the transmit load on each member adapter and balances the traffic across member adapters. One adapter accepts all receive traffic.
+
+ALB teams have an option for Receive Load Balancing (RLB). RLB allows the team to balance receive traffic across all member adapters. RLB is enabled by default.
+
+Primary and Secondary adapters can be selected for this team, but are not required if RLB is disabled. If RLB is enabled, a Primary is automatically assigned.
+
+RLB must have a Primary adapter. You can set a new adapter to Primary, but cannot remove the priority from the team. 
+Setting a Primary adapter when RLB is disabled is optional. 
+The Primary adapter will be the only adapter to receive traffic when RLB is disabled. 
+If RLB is enabled, the healthiest high-speed adapter is automatically selected and marked as the Primary. 
+If the Primary adapter is changed or added, the team will reload, causing a momentary loss of connectivity. 
+Configuration notes
+ALB does not balance non-routed protocols such as NetBEUI and some IPX* traffic. 
+ALB supports from two to eight adapter ports per team. 
+RLB is not supported on Hyper-V*. 
+Team members do not have to run at the same speed or duplex. 
+No switch configuration is required for this team type. 
+This team type works with any switch or hub. 
+
+--------------------------------------------------------------------------------
+
+Virtual Machine Load Balancing
+Virtual Machine Load Balancing (VMLB) provides transmit and receive traffic load balancing across Virtual Machines bound to the team interface, as well as fault tolerance in the event of switch port, cable, or adapter failure.
+
+The driver analyzes the transmit and receive load on each member adapter and balances the traffic across member adapters. In a VMLB team, each Virtual Machine is associated with one team member for its TX and RX traffic.
+
+If only one virtual NIC is bound to the team, or if Hyper-V is removed, then the VMLB team will act like an AFT team.
+
+Primary and Secondary adapters can be selected for this team, but are not required for the team to function (if not selected, the Primary adapter is assigned automatically).
+
+Setting a Primary adapter for the team is optional. 
+If a Primary adapter is not selected, the healthiest high-speed adapter is automatically selected and marked as the Primary. 
+If the Primary adapter is changed or added, the team will reload, causing a momentary loss of connectivity. 
+Configuration notes
+VMLB does not balance non-routed protocols such as NetBEUI and some IPX traffic. 
+VMLB supports from two to eight adapter ports per team. 
+Team members do not have to run at the same speed or duplex. 
+No switch configuration is required for this team type. 
+This team type works with any switch or hub. 
+
+--------------------------------------------------------------------------------
+
+Static Link Aggregation
+Static Link Aggregation (SLA) is a performance technology developed to increase throughput between switches or a server and switch. This is accomplished by bundling or channeling several ports together and showing them as a single link. This increases the total bandwidth for the link and provides fault- tolerance in the event of a switch port, cable, or adapter failure.
+
+Primary and Secondary adapters can be selected for this team, but are not required.
+
+If a Primary adapter is selected, the team will use that adapter's MAC address. 
+If a Primary adapter is added or changed, the team will reload, causing a momentary loss of connectivity. 
+Configuration notes
+SLA supports two to eight adapter ports per team. 
+All team members must be linked to the same switch. 
+All team members must run at the same speed. 
+All team members must be connected at full duplex. 
+The switch must be configured for SLA before the team is created. 
+To prevent packet loss, adapters should be added or removed from the team in a link-down state. 
+This team type is supported on Cisco switches with channeling mode set to "ON", Intel switches capable of Link Aggregation, and other switches capable of static 802.3ad. 
+SLA balances all traffic. 
+ 
+
+ NOTE: The FEC (Fast EtherChannel) and GEC (Gigabit EtherChannel) team types have been renamed to Static Link Aggregation. 
+
+ 
+
+
+--------------------------------------------------------------------------------
+
+IEEE 802.3ad Dynamic Link Aggregation
+IEEE 802.3ad Dynamic Link Aggregation is an IEEE standard for increasing throughput between switches or a server and switch. This is accomplished by dynamically bundling or channeling several ports together and showing them as a single link using Link Aggregation Control Protocol (LACP). This increases the total bandwidth for the link and provides fault-tolerance in the event of switch port, cable, or adapters failure.
+
+Primary and Secondary adapters can be selected for this team, but are not required.
+
+If a Primary adapter is selected, the team will use that adapter's MAC address. 
+If a Primary adapter is added or changed, the team will reload, causing a momentary loss of connectivity. 
+Configuration notes
+IEEE 802.3ad supports two to eight adapter ports per team. 
+All team members must run at the same speed to be in the same aggregator. 
+All team members must be connected at full duplex. 
+The switch must be configured for IEEE 802.3ad before the team is created. 
+To prevent packet loss, adapters should be added or removed from the team in a link-down state. 
+This team type requires that the switch fully supports the 802.3ad standard. 
+This team type balances all traffic. 
+Some switches will not allow fiber and copper adapters to be in the same aggregator even if their speed is the same. 
+If multiple switches are used, all members connected to the same switch must run at the same speed. 
+Check your switch documentation to verify specific vendor requirements for switch configuration. 
+
+--------------------------------------------------------------------------------
+
+Switch Fault Tolerance
+Switch Fault Tolerance (SFT) provides redundancy across switches. An adapter connected to one switch will automatically failover to a standby adapter connected to a different switch in the event of a switch, switch port, cable, or adapter failure.
+
+Intel PROSet selects one adapter to be the Active adapter and the other adapter to be the Standby adapter. Primary and Secondary adapters can be selected for the team, but are not required.
+
+If a Primary adapter is chosen, it becomes the Active adapter for the team. 
+If a Secondary adapter is chosen, it becomes the standby adapter. If the active adapter fails, the secondary adapter takes over. 
+If no Primary is selected, the team will use the healthiest high-speed adapter in the team. 
+If the Primary adapter is changed or added, the team will reload causing a momentary loss of connectivity. 
+Configuration notes
+SFT supports only two adapter ports per team. 
+Each port is connected to a separate switch. 
+Team members do not have to run at the same speed or duplex. 
+No switch configuration is required. 
+This team type is supported by any switch, but is not supported on hubs. 
+
+
+Summary
+
+Most people should use ALB (mode=6) for NIC teaming their Linux server because it is the simplest method to achieve fault-tolerance and load balancing. If you require higher bandwidth, and you have an internally redundant switch, and you can configure your switchports to use LACP, then you should use LACP (mode=4) for NIC teaming.
+
+ALB
+The balance-alb has specific disadvantages. Mainly that it semi-intelligently selects an outgoing port for new connections, and they're stuck to that one port for the life of the connection (it's actually done by MAC, not port, if a port fails the MAC gets assigned to another port, thus allowing the connection to continue).
+For balance-alb, both sending and receiving frames are load balanced using the change MAC address trick. This might cause issues at application levels. Not all applications are matured for this mode.
+
+LACP
+yes you can choose the method of Load balancing in LACP:
+
+port-channel load-balance {dst-ip | dst-mac | src-dst-ip | src-dst-mac | src-ip | src-mac}
+
+Configure an EtherChannel load-balancing method.
+
+The default is src-mac.
+
+Select one of these load-distribution methods:
+
+•dst-ip—Load distribution is based on the destination-host IP address.
+
+•dst-mac—Load distribution is based on the destination-host MAC address of the incoming packet.
+
+•src-dst-ip—Load distribution is based on the source-and-destination host-IP address.
+
+•src-dst-mac—Load distribution is based on the source-and-destination host-MAC address.
+
+•src-ip—Load distribution is based on the source-host IP address.
+
+•src-mac—Load distribution is based on the source-MAC address of the incoming packet.
+
+**** More info.
+
+Your talking about NIC bonding. You cannot have the same mac-address tied to 2 NICs at once because you will create MAC Flapping on the switches. The only way to do this is to create an LACP bond with your NIC interfaces & the switch interfaces, but these have to be either stacked switches(3750G only) or 2 x 6500 in VSS configuration.
+
+In your case with 2 3560's, you cannot run LACP to 2 different switches, you can however run LACP to a single switch and have 2-8 NICs connecting into this 1 switch, the LACP port-channel will see 1 mac-address that is basically shared between multiple NICs on the server.
+
+NIC Bond Modes
+
+Mode 0 - balance-rr
+
+Single switch/stack configuration or multiple switch,create non-lacp etherchannels on switch
+
+This also creates a lot of “out of order” packets and forces TCP congestion control to kick in because it balances a tcp stream.
+
+Mode 1 - active-backup
+
+Can use on multiple switches - best for High availability
+
+Mode 2 - balance-xor
+
+Single switch/stack configuration, create non-lacp etherchannels on switch
+
+Mode 3 - broadcast
+
+Multiple switch configuration or stack that is not trunked together and connects to outside networks
+
+Mode 4 - LACP
+
+Single switch/stack configuration , create lacp etherchannels on switch
+
+Mode 5 - balance-tlb (transmit load balancing)
+
+Can use on multiple switches
+
+Mode 6 - balance alb (adaptive load balancing, both tx and rx)
+
+Can use on multiple switches
+
+If you plan on connecting into 2 different 3560 switches then you can use Mode 0,1,5,6
+
+Note: Using mode 6, the “updelay” needs to be set to something equal or greater than the switches forwarding-delay, the cisco default forwarding delay is set to 15. Cisco value of 15 is determined based upon the STP Diameter traversing 7 switches to a layer 2 destination. If you change the spanning-tree diameter then you should change the “updelay” to this forwarding-delay.
+
+Also, you cannot have "portfast" enabled on your bonded switch interfaces, portfast can be enabled with LACP, but you cannot use this in your config.
+
+
+Copying a file to local machine to veeam server is slow from the customers network.
+
+SJC04_Test ExaGrid Share. BI Development Backups
+
+sjc4veeam-proxy
+sjc4Veeam-eplus
+sjc4veeam01       Storage=FC_PURE02   LUN SJC4PURE02_DS04

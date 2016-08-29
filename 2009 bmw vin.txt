@@ -1,0 +1,105 @@
+
+
+
+
+Vehicle:2009 BMW 328XI SULEV
+VIN:WBAPK53529A513977
+
+
+
+ 3' E90 LCI BMW 328xi. Type Code: PK53
+Vehicle Identification Number	WBAPK53529A513977
+Type	PK53
+Model	328xi - USA
+Development Code	E90 (MUE)
+Chassis	LIM
+Steering	LL
+Doors	4
+Engine	N51
+Displacement	3.00
+Power	172
+Drivetrain	ALLR
+Transmission	AUT
+Color	Schwarz 2 - 668
+Upholstery	Leder Dakota/schwarz - LCSW
+Production Plant	MUNICH
+Production Date	2009-02-18
+
+ 
+
+Options
+1CA	Selection Cop Relevant Vehicles	Selektion Cop Relevanter Fahrzeuge
+2KU	Alloy Wheels V-spoke 285	Lm Raeder V-speiche 285
+2VB	Tyre Pressure Indicator	Reifendruckanzeige
+203	All-wheel-drive System	Allradsystem
+205	Automatic Transmission	Automatic Getriebe
+240	Leather Steering Wheel	Lederlenkrad
+248	Steering Wheel Heating	Lenkradheizung
+249	Multi-function For Steering Wheel	Multifunktion Fuer Lenkrad
+319	Integrated Universal Remote Control	Integrierte Universal-fernbedienung
+4AB	Fine-wood Trim Burr Walnut	Edelholzausfuehrung Nussbaum Wurzel
+4NA	Interior Mirror With Dig. Compass	Innenspiegel Mit Digitalem Kompass
+403	Glas Roof, Electric	Glasdach, Elektrisch
+430	Int/ext Rr Vw Mirror W Aut Anti-dazzle	Innen-/aussenspiegel Aut.abblendend
+431	Interior Rr Vw Mirror W Aut Anti-d	Innenspiegel,automatisch Abblendend
+441	Smokers Package	Raucherpaket
+459	Seat Adjustm., Electr. W. Memory	Sitzverstellung, Elektr.mit Memory
+465	Through-load System	Durchladesystem
+488	Lumbar Support Driver/front Passenger	Lordosenstuetze Fahrer/beifahrer
+494	Seat Heating F Driver/front Passenger	Sitzheizung Fuer Fahrer/beifahrer
+5GA	Prep. Anti-theft Alarm System	Alarmanlagenvorbereitung
+502	Headlight Washer System	Scheinwerfer-waschanlage
+521	Rain Sensor	Regensensor
+534	Automatic Air Conditioning	Klimaautomatik
+544	Cruise Control With Braking Function	Geschwindigkeitsregel. Mit Bremsf.
+563	Lights Package	Lichtpaket
+570	Stronger Electricity Supply	Staerkere Stromversorgung
+6AA	Bmw Teleservices	Bmw Teleservices
+6AB	Control Teleservices	Steuerung Teleservices
+6FL	Usb-/audio Interface	Usb-audio-schnittstelle
+6UH	Traffic Information	Traffic Information
+609	Navigation System Professional	Navigationssystem Professional
+615	Extended Bmw Online Information	Erweiterte Bmw Online Information
+620	Voice Input System	Spracheingabesystem
+639	Complete Prep. Cellular Phone Usa/cdn	Komplettvorb. Handy Usa/cdn
+653	High Definition Radio	High Definition Radio
+676	Hifi Loudspeaker System	Hifi Lautsprechersystem
+693	Satellite Tuner Preparation	Satellitentuner Vorbereitung
+697	Area-code 1	Area-code 1
+8SC	Country Spec. Release Of Teleservice	Laenderspez. Teleservicefreisch.
+8SP	Cop Control	Cop Steuerung
+925	Shipping Protection Package	Versandschutzpaket
+
+ 
+
+Standard Equipment
+497	Centre Armrest In Rear	Mittelarmlehne Im Fond
+520	Foglights	Nebelscheinwerfer
+645	Radio Control Us	Radio-steuerung Us
+823	Hot Climate Version	Heissland-ausfuehrung
+845	Acoustic Belt Warning	Akustische Gurtwarnung
+850	Add Fuel Tank Filling For Export	Zusaetzl. Tankfuellung Export
+853	Language Version English	Sprachversion Englisch
+876	Radio Frequency 315 Mhz	Funkfrequenz 315 Mhz
+
+
+Lighting Information
+ 1. H7 (Low beam Headlamp)
+ 2. H11-55w (Fog Bulbs)
+ 3. 2825, 5W (front side marker light) 
+ 4. H7 (High beam headlamp)
+ 5. 2825 (Parking light)
+ 6. 7507A, 7507 AST, 2825 (Front Turn signal)
+ 7. 7528 (Rear turn signal)
+ 8. 7528 (Tail light)
+ 9. 7528 (stop light)
+ 10. 6418 (License plate)
+ 11. 6418 (Glove box)
+ 12. 2821, 6411, 6418 (step/courtesy light)
+ 13. 6411 (Trunk/cargo area)
+ 
+ TPMS Info 
+
+328i xDrive	2009	36-23-6-781-847	RDE-008	2009 production date before 8/31/2009   <---My Car. 
+2009 - 2012	36-10-6-790-054	RDE-012	2009 production date after 9/1/2009
+2012 Non-Sedan models only (E91, E92 and E93 only)
