@@ -1,4 +1,4 @@
-#!/bin/perl
+#!/bin/perl 
  use Time::Local;
  open LOG, ">log.txt" or die "Cannot open log.txt $!";
  my $date = localtime;
@@ -16,7 +16,7 @@
        print "Starting test $a of $b on $date\n\n";  
 
  ##CHANGE SERVER IP AND TCP WINDOW BELOW ##
- my $result = `iperf -c 10.10.10.5 -w 128k`;           #client side to server only 
+ my $result = `iperf -c 172.20.240.43 -w 128k`;           #client side to server only 
  ##
        my $num = sprintf "%3d",$a;    
        print "$result\n\n";
